@@ -18,3 +18,6 @@ npm run build
 ```
 
 <img src="gougu-tree.gif"/>
+
+## TODO
+- [ ] zoom in canvas during rendering
