@@ -1,5 +1,12 @@
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
+  margin: 0;
+  color: #333;
+}
+
+#options {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
 }
