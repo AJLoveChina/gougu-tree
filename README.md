@@ -1,15 +1,20 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 Gougu Tree
 
 This project has been created using **webpack-cli**, you can now run
 
+Local Install
+```
+npm install
+```
+
+Local Test
+```
+npm run server
+```
+
+Local Build
 ```
 npm run build
 ```
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
+<img src="gougu-tree.gif"/>
