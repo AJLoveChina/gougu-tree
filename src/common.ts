@@ -1,4 +1,4 @@
-import { IPoint } from "./interface";
+import { IPoint, Matrix2D } from "./interface";
 
 export function getRectCorners(
   midPoint: IPoint,
@@ -114,4 +114,49 @@ export function randomColor() {
   return `rgba(${Math.floor(random(0, 255))}, ${Math.floor(
     random(0, 255)
   )}, ${Math.floor(random(0, 255))}, ${random(0.5, 1)})`;
+}
+
+export function getInitMatrix2d(): Matrix2D {
+  return [1, 0, 0, 1, 0, 0];
+}
+
+/**
+ * Multiply matrix A by matrix B to nest transformations
+ */
+export function multiplyTransformMatrices(a: Matrix2D, b: Matrix2D): Matrix2D {
+  // Matrix multiply a * b
+  return [
+    a[0] * b[0] + a[2] * b[1],
+    a[1] * b[0] + a[3] * b[1],
+    a[0] * b[2] + a[2] * b[3],
+    a[1] * b[2] + a[3] * b[3],
+    a[0] * b[4] + a[2] * b[5] + a[4],
+    a[1] * b[4] + a[3] * b[5] + a[5],
+  ];
+}
+
+/**
+ * Apply transform t to point p
+ */
+export function transformPoint(p: IPoint, t: Matrix2D) {
+  return {
+    x: t[0] * p.x + t[2] * p.y + t[4],
+    y: t[1] * p.x + t[3] * p.y + t[5],
+  };
+}
+
+/**
+ * Invert transformation t
+ */
+export function invertTransform(t: Matrix2D): Matrix2D {
+  let a = 1 / (t[0] * t[3] - t[1] * t[2]),
+    r: Matrix2D = [a * t[3], -a * t[1], -a * t[2], a * t[0], 0, 0],
+    o = transformPoint({ x: t[4], y: t[5] }, r);
+  r[4] = -o.x;
+  r[5] = -o.y;
+  return r;
+}
+
+export function copyMatrix(matrix: Matrix2D): Matrix2D {
+  return [...matrix];
 }

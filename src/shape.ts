@@ -27,7 +27,7 @@ export class Polygon extends Shape {
       }
     });
 
-    ctx.strokeStyle = this.strokeStyle;
+    this.strokeStyle && (ctx.strokeStyle = this.strokeStyle);
     ctx.closePath();
     ctx.stroke();
     if (this.fillStyle) {
@@ -72,7 +72,7 @@ export class Rect extends Polygon {
     return distanceA2B(this.tl, this.bl);
   }
 
-  set(options: { fillStyle?: string, strokeStyle?: string }) {
+  set(options: { fillStyle?: string; strokeStyle?: string }) {
     this.fillStyle = options.fillStyle;
     this.strokeStyle = options.strokeStyle;
   }

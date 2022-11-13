@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "strictPropertyInitialization": true,
+    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "module": "es6",

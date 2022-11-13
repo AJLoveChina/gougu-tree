@@ -9,7 +9,7 @@ const config = {
   entry: "./src/index.ts",
   devtool: "inline-source-map",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "docs"),
   },
   devServer: {
     open: true,

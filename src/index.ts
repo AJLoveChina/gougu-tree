@@ -17,9 +17,6 @@ function main() {
   canvas.height = window.innerHeight;
   document.body.appendChild(canvas);
 
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   let bFill = (document.getElementById("fill-checkbox") as HTMLInputElement)
     .checked;
 
@@ -35,9 +32,11 @@ function main() {
 
 function listen() {
   const btn = document.getElementById("render");
-  btn.addEventListener("click", () => {
-    main();
-  });
+  if (btn) {
+    btn.addEventListener("click", () => {
+      main();
+    });
+  }
 }
 
 main();

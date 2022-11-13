@@ -1,12 +1,12 @@
-import { Shape, Polygon, Rect } from "./shape";
+import { Shape, Rect } from "./shape";
 import {
-  distanceA2B,
   getRectCorners,
   LineSegment,
   movePoint,
   randomColor,
   rotateVector,
 } from "./common";
+import { CusCanvas } from "./canvas";
 
 export function renderShapes(
   canvas: HTMLCanvasElement,
@@ -14,6 +14,10 @@ export function renderShapes(
 ) {
   let midPoint = { x: canvas.width / 2, y: canvas.height / 2 };
   const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("can't get ctx");
+  }
+  const cusCanvas = new CusCanvas({ ctx });
 
   const allShapes = gouguTreeShapes(
     new Rect(getRectCorners(midPoint, 100, 100))
@@ -23,6 +27,7 @@ export function renderShapes(
     if (ctx.canvas.hidden) {
       return;
     }
+
     let firstOne = allShapes.shift();
     if (firstOne) {
       firstOne.set({
@@ -34,11 +39,14 @@ export function renderShapes(
           fillStyle: options.bRandomColor ? randomColor() : defaultColor,
         });
       }
-      renderObjs([firstOne], ctx);
+
+      cusCanvas.add(firstOne);
+      cusCanvas.zoom(0.0003, midPoint);
+      cusCanvas.render();
     } else {
       clearInterval(interval);
     }
-  }, 1000 / 24);
+  }, 1000 / 60);
   return interval;
 }
 
